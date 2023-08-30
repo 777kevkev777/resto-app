@@ -1,0 +1,54 @@
+class Dish:
+    def __init__(self, name, price):
+        self.name = name
+        self.price = price
+
+
+class Restaurant:
+    def __init__(self, name):
+        self.name = name
+        self.menu = {}
+
+    def add_dish_to_menu(self, dish, price):
+        self.menu[dish] = price
+
+    def display_menu(self):
+        print("Menu:")
+        for dish, price in self.menu.items():
+            print(f"{dish.name}: ${price:.2f}")
+
+    def take_order(self):
+        order = []
+        print("Enter the dishes you'd like to order (press Enter to finish):")
+        while True:
+            dish_name = input()
+            if not dish_name:
+                break
+            if dish_name in self.menu:
+                order.append(self.menu[dish_name])
+            else:
+                print("Dish not found in the menu.")
+
+        total_price = sum(order)
+        print(f"Total price: ${total_price:.2f}")
+        return total_price
+
+
+def main():
+    restaurant = Restaurant("Sample Restaurant")
+    dish1 = Dish("Pasta", 10.99)
+    dish2 = Dish("Burger", 8.49)
+    dish3 = Dish("Salad", 6.99)
+
+    restaurant.add_dish_to_menu(dish1, dish1.price)
+    restaurant.add_dish_to_menu(dish2, dish2.price)
+    restaurant.add_dish_to_menu(dish3, dish3.price)
+
+    print(f"Welcome to {restaurant.name}!")
+    restaurant.display_menu()
+    total = restaurant.take_order()
+    print("Thank you for dining with us!")
+
+if __name__ == "__main__":
+    main()
+
